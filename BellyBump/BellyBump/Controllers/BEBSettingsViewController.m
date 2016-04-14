@@ -237,28 +237,34 @@
         
     }
 }
+
 - (IBAction)FacebookLogin:(id)sender {
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    if([FBSDKAccessToken currentAccessToken])
-    {
-        [self fetchUserInfo];
-    }else{
-        [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-            if(error)
-            {
-                NSLog(@"Login process error");
-            }else if(result.isCancelled){
-                NSLog(@"User cancelled login");
-            }else{
-                NSLog(@"Login success");
-                if([result.grantedPermissions containsObject:@"email"])
+    BEBSettings *settings = [BEBDataManager sharedManager].settings;
+    if([settings.usernameFacebook isEqualToString:@""]){
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        if([FBSDKAccessToken currentAccessToken])
+        {
+            [self fetchUserInfo];
+        }else{
+            [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                if(error)
                 {
-                    [self fetchUserInfo];
+                    NSLog(@"Login process error");
+                }else if(result.isCancelled){
+                    NSLog(@"User cancelled login");
                 }else{
-//                    [SVProgressHUD showErrorWithStatus:@"Facebook email permission error"];
+                    NSLog(@"Login success");
+                    if([result.grantedPermissions containsObject:@"email"])
+                    {
+                        [self fetchUserInfo];
+                    }else{
+                        //                    [SVProgressHUD showErrorWithStatus:@"Facebook email permission error"];
+                    }
                 }
-            }
-        }];
+            }];
+        }
+
+        
     }
 }
 -(void)fetchUserInfo{
