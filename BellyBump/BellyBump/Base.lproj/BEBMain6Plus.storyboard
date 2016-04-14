@@ -2852,7 +2852,7 @@
                                                     <action selector="thirdAudioButtonDidTouch:" destination="PMt-uP-VYk" eventType="touchUpInside" id="PRS-7Z-qO5"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-0B-bZ8">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-0B-bZ8">
                                                 <rect key="frame" x="301" y="4" width="95" height="41"/>
                                                 <state key="normal" title="Button" image="icon_song4"/>
                                                 <connections>
@@ -2921,10 +2921,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_loop" translatesAutoresizingMaskIntoConstraints="NO" id="AgD-VC-2Rr">
-                                                <rect key="frame" x="161" y="82" width="32" height="15"/>
+                                                <rect key="frame" x="90" y="82" width="32" height="15"/>
                                                 <animations/>
                                             </imageView>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h85-jD-gYR">
+                                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h85-jD-gYR">
                                                 <rect key="frame" x="201" y="74" width="51" height="31"/>
                                                 <animations/>
                                                 <color key="onTintColor" red="0.78039215689999997" green="0.87843137250000003" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2933,6 +2933,18 @@
                                                     <action selector="loopVideoSwitchValueChanged:" destination="PMt-uP-VYk" eventType="valueChanged" id="e4t-Eh-ARu"/>
                                                 </connections>
                                             </switch>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rc7-ID-cON">
+                                                <rect key="frame" x="146" y="75" width="220" height="29"/>
+                                                <segments>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="3"/>
+                                                    <segment title="loop"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="changeLoop:" destination="PMt-uP-VYk" eventType="valueChanged" id="w54-kW-Bg4"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3031,6 +3043,7 @@
                         <outlet property="fpsSelectionView" destination="3cq-ZR-zeE" id="W2K-E7-qhN"/>
                         <outlet property="hiddenBottomButton" destination="0Xs-tA-j4f" id="NBE-05-jbM"/>
                         <outlet property="imageView" destination="VU9-WP-Rcy" id="kHn-gp-iKJ"/>
+                        <outlet property="loopSelect" destination="rc7-ID-cON" id="seb-iq-idR"/>
                         <outlet property="loopVideoSwitch" destination="h85-jD-gYR" id="Jrt-ck-HOI"/>
                         <outlet property="musicButton" destination="EL6-qb-oL4" id="mTf-jS-MrH"/>
                         <outlet property="nameOfSelectedSong" destination="Abx-bp-mg2" id="PeK-w4-xWu"/>
@@ -3096,7 +3109,7 @@
         <image name="icon_song1" width="41" height="41"/>
         <image name="icon_song2" width="41" height="41"/>
         <image name="icon_song3" width="41" height="41"/>
-        <image name="icon_song4" width="21" height="21"/>
+        <image name="icon_song4" width="41" height="41"/>
         <image name="icon_switch_camera" width="25" height="19"/>
         <image name="icon_take_photo" width="60" height="60"/>
         <image name="icon_twitter" width="53" height="53"/>

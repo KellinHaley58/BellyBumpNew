@@ -3,6 +3,8 @@
 #import "BEBSettingsCell.h"
 #import "BEBDataManager.h"
 #import "BEBSettings.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface BEBSettingsViewController () <BEBSettingsCellDelegate, MFMailComposeViewControllerDelegate>
 
@@ -227,6 +229,7 @@
         [self presentViewController:composeViewController animated:YES completion:nil];
     }else if(indexPath.section == 2){
         if(indexPath.row == 0){ // facebook
+            [self FacebookLogin:nil];
            
         }else{ // twitter
             
@@ -234,6 +237,64 @@
         
     }
 }
+- (IBAction)FacebookLogin:(id)sender {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    if([FBSDKAccessToken currentAccessToken])
+    {
+        [self fetchUserInfo];
+    }else{
+        [login logInWithReadPermissions:@[@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            if(error)
+            {
+                NSLog(@"Login process error");
+            }else if(result.isCancelled){
+                NSLog(@"User cancelled login");
+            }else{
+                NSLog(@"Login success");
+                if([result.grantedPermissions containsObject:@"email"])
+                {
+                    [self fetchUserInfo];
+                }else{
+//                    [SVProgressHUD showErrorWithStatus:@"Facebook email permission error"];
+                }
+            }
+        }];
+    }
+}
+-(void)fetchUserInfo{
+    if([FBSDKAccessToken currentAccessToken])
+    {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            if(!error)
+            {
+                
+                //
+                //                NSDictionary *userinfo = [result objectForKey:@"user"];
+                //                NSNumber *userid = [result objectForKey:@"id"];
+                //                NSString *username = [userinfo objectForKey:@"username"];
+                //                [Common saveValueKey:@"user_id" Value:username];
+                //                NSString *useremail = [userinfo objectForKey:@"email"];
+                //                [Common saveValueKey:@"user_email" Value:useremail];
+                //                [SVProgressHUD dismiss];
+                
+                
+                NSString *email = [result objectForKey:@"email"];
+                NSString *userId = [result objectForKey: @"id"];
+                if(email.length > 0){
+                    BEBSettings *settings = [BEBDataManager sharedManager].settings;
+                    settings.usernameFacebook = email;
+                    [self.tableView reloadData];
+                }else{
+                    NSLog(@"Facebook email is not verified");
+                }
+            }else
+            {
+                NSLog(@"Error %@", error);
+            }
+        }];
+    }
+}
+
 //*****************************************************************************
 #pragma mark -
 #pragma mark - ** BEBSettingsCellDelegate **

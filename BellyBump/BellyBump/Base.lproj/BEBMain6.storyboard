@@ -2852,10 +2852,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_loop" translatesAutoresizingMaskIntoConstraints="NO" id="WM4-s4-kQ5">
-                                                <rect key="frame" x="148" y="73" width="32" height="15"/>
+                                                <rect key="frame" x="60" y="73" width="32" height="15"/>
                                                 <animations/>
                                             </imageView>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2fk-Yb-V1O">
+                                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2fk-Yb-V1O">
                                                 <rect key="frame" x="192" y="65" width="51" height="31"/>
                                                 <animations/>
                                                 <color key="onTintColor" red="0.78039215689999997" green="0.87843137250000003" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2864,6 +2864,18 @@
                                                     <action selector="loopVideoSwitchValueChanged:" destination="RQR-vk-T0T" eventType="valueChanged" id="oyg-vP-ull"/>
                                                 </connections>
                                             </switch>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nMM-KQ-A47">
+                                                <rect key="frame" x="120" y="65" width="200" height="29"/>
+                                                <segments>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="3"/>
+                                                    <segment title="loop"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="changeLoop:" destination="RQR-vk-T0T" eventType="valueChanged" id="wQJ-6f-PZB"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3000,6 +3012,7 @@
                         <outlet property="fpsSelectionView" destination="bFl-HS-7GQ" id="sEM-ZX-WEe"/>
                         <outlet property="hiddenBottomButton" destination="vxK-QR-ReF" id="BFK-uL-8xi"/>
                         <outlet property="imageView" destination="iIf-7O-l5Y" id="uzh-kL-mQ4"/>
+                        <outlet property="loopSelect" destination="nMM-KQ-A47" id="VOb-pQ-eJF"/>
                         <outlet property="loopVideoSwitch" destination="2fk-Yb-V1O" id="44i-ve-U2a"/>
                         <outlet property="musicButton" destination="TiT-Zo-W74" id="1fd-Zr-gqe"/>
                         <outlet property="nameOfSelectedSong" destination="XSv-V8-N2Q" id="eeX-JI-zVq"/>

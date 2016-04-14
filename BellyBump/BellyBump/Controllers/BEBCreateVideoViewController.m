@@ -63,6 +63,7 @@ static NSString *const placeHolderText = @"Double tap to edit text";
 @property UIBarButtonItem *backButton;
 @property UILabel *titleLabelNavigationBar;
 @property double testingTimeFrame;
+@property int loopCount;
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -101,6 +102,7 @@ static NSString *const placeHolderText = @"Double tap to edit text";
 @property (weak, nonatomic) IBOutlet UISlider *sliderTrimmer;
 @property (weak, nonatomic) IBOutlet UILabel *trackCurrentPlayback;
 @property (weak, nonatomic) IBOutlet UILabel *trackCurrentLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *loopSelect;
 
 
 #pragma mark - IBActions
@@ -122,6 +124,7 @@ static NSString *const placeHolderText = @"Double tap to edit text";
 - (IBAction)hiddenButtonDidTouch:(id)sender;
 - (IBAction)nextBarButton:(id)sender;
 - (IBAction)sliderTrimmerButton:(id)sender;
+- (IBAction)changeLoop:(id)sender;
 
 @end
 
@@ -136,6 +139,7 @@ static NSString *const placeHolderText = @"Double tap to edit text";
     // Do any additional setup after loading the view.
     self.paused = YES;
     self.fpsValue = 1;
+    self.loopCount = 0;
     
     
     self.titleLabelNavigationBar = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -261,23 +265,28 @@ static NSString *const placeHolderText = @"Double tap to edit text";
     if(self.initialLeftVal != _left){ // left changed
         self.initialLeftVal = _left;
         self.rangeSlider.leftValue = self.initialLeftVal;
-        self.rangeSlider.rightValue = self.rangeSlider.leftValue + frames / self.songMaxTime;
+        self.rangeSlider.rightValue = self.rangeSlider.leftValue + frames / (self.songMaxTime * self.fpsValue);
         if(self.rangeSlider.rightValue >= 1){
             self.rangeSlider.rightValue = 1;
-            self.rangeSlider.leftValue = 1 - frames / self.songMaxTime;
+            self.rangeSlider.leftValue = 1 - frames / (self.songMaxTime * self.fpsValue);
         }
     }else // right changed
     {
         self.initialRightVal = _right;
         self.rangeSlider.rightValue = self.initialRightVal;
-        self.rangeSlider.leftValue = self.rangeSlider.rightValue - frames / self.songMaxTime;
+        self.rangeSlider.leftValue = self.rangeSlider.rightValue - frames / (self.songMaxTime * self.fpsValue);
         if(self.rangeSlider.leftValue <= 0){
             self.rangeSlider.leftValue = 0;
-            self.rangeSlider.rightValue = frames / self.songMaxTime;
+            self.rangeSlider.rightValue = frames / (self.songMaxTime * self.fpsValue);
         }
     }
 }
 
+-(IBAction)changeLoop:(UISegmentedControl *)sender
+{
+    self.loopCount = 0;
+    
+}
 - (void)didReceiveMemoryWarning;
 {
     [super didReceiveMemoryWarning];
@@ -695,16 +704,19 @@ static NSString *const placeHolderText = @"Double tap to edit text";
     if (self.playedTime >= self.videoTime) {
         self.playedTime = 0;
         self.photoIdx = 0;
+        self.loopCount++;
         
         // Pause video and just play one time
-        if (![self.loopVideoSwitch isOn]) {
-            [self playButtonDidTouch:nil];
-            [self stopAudio];
-            
-            
-            
-            [self.playButton setHidden:NO];
-            [self.playButton setAlpha:1.0f];
+        if(self.loopSelect.selectedSegmentIndex != 3){ //!loop
+            if(self.loopCount >= self.loopSelect.selectedSegmentIndex+1){
+                [self playButtonDidTouch:nil];
+                [self stopAudio];
+                
+                
+                
+                [self.playButton setHidden:NO];
+                [self.playButton setAlpha:1.0f];
+            }
         }
     }
     else if (self.playedTime > (self.photoIdx + 1) * self.updateImageTime) {
@@ -1833,7 +1845,7 @@ static NSString *const placeHolderText = @"Double tap to edit text";
     _rangeSlider.minValue = 0;
     int frames = self.story.photos.count;
     self.songMaxTime = trackLength;
-    _rangeSlider.rightValue = frames / self.songMaxTime;
+    _rangeSlider.rightValue = frames / (self.songMaxTime * self.fpsValue);
     self.initialLeftVal = _rangeSlider.leftValue;
     self.initialRightVal = _rangeSlider.rightValue;
     self.sliderTrimmer.value = 0;

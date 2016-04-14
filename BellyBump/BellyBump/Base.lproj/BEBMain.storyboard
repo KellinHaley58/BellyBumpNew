@@ -2961,10 +2961,10 @@
                                                 </connections>
                                             </slider>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_loop" translatesAutoresizingMaskIntoConstraints="NO" id="U8A-JB-bLO">
-                                                <rect key="frame" x="123" y="73" width="32" height="15"/>
+                                                <rect key="frame" x="50" y="73" width="32" height="15"/>
                                                 <animations/>
                                             </imageView>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-HY-0Ei">
+                                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-HY-0Ei">
                                                 <rect key="frame" x="162" y="65" width="51" height="31"/>
                                                 <animations/>
                                                 <color key="onTintColor" red="0.78039215689999997" green="0.87843137250000003" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2986,6 +2986,18 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9K5-WB-moY">
+                                                <rect key="frame" x="80" y="65" width="200" height="29"/>
+                                                <segments>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="3"/>
+                                                    <segment title="loop"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="changeLoop:" destination="3Bc-uM-5dT" eventType="valueChanged" id="f6P-jw-aNL"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3084,6 +3096,7 @@
                         <outlet property="fpsSelectionView" destination="gKy-gH-tXq" id="Wed-Ij-C1S"/>
                         <outlet property="hiddenBottomButton" destination="lli-C8-ADC" id="02d-te-NQk"/>
                         <outlet property="imageView" destination="Xog-dL-8zu" id="JYr-8S-oT7"/>
+                        <outlet property="loopSelect" destination="9K5-WB-moY" id="Zy2-f4-K2D"/>
                         <outlet property="loopVideoSwitch" destination="Ykn-HY-0Ei" id="Uhg-sw-dQ3"/>
                         <outlet property="musicButton" destination="qg4-qa-fPc" id="7Bu-eF-WFs"/>
                         <outlet property="nameOfSelectedSong" destination="pzn-C0-Vf3" id="ruc-8p-Z6l"/>
