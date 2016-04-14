@@ -1098,7 +1098,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 17601bfdba735db891ac05266f2c92632557f914 7ba78a1d2a9a2368c7f963419e2457a2cbc9cd22f9ac35ad0b2e332daa1444dc";
+			shellScript = "./Fabric.framework/run e952ab0d5deb3ad6e91eb3ae0eb7db108d635812 de5c74892b50c57f28f99a49fc22355812cda45b5cb14fb2b442b9387784f288";
 		};
 		87EBEE931D0A1965422E25DC /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1291,7 +1291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -1330,7 +1330,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1371,7 +1371,7 @@
 					"${SRCROOT}/BellyBump/ThirdParties/GoogleAPI/YouTube",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/BellyBump/BellyBumpInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.bellybump.BellyBump;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1413,7 +1413,7 @@
 					"${SRCROOT}/BellyBump/ThirdParties/GoogleAPI/YouTube",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/BellyBump/BellyBumpInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.bellybump.BellyBump;
 				PRODUCT_NAME = "$(TARGET_NAME)";

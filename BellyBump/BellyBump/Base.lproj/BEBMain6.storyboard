@@ -2872,6 +2872,7 @@
                                                     <segment title="3"/>
                                                     <segment title="loop"/>
                                                 </segments>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="changeLoop:" destination="RQR-vk-T0T" eventType="valueChanged" id="wQJ-6f-PZB"/>
                                                 </connections>

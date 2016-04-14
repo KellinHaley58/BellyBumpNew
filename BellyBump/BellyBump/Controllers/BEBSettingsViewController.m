@@ -5,6 +5,9 @@
 #import "BEBSettings.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <Twitter/Twitter.h>
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface BEBSettingsViewController () <BEBSettingsCellDelegate, MFMailComposeViewControllerDelegate>
 
@@ -232,9 +235,28 @@
             [self FacebookLogin:nil];
            
         }else{ // twitter
-            
+            [self TwitterLogin];
         }
         
+    }
+}
+
+-(void)TwitterLogin{
+    
+    BEBSettings *settings = [BEBDataManager sharedManager].settings;
+    if([settings.usernameTwitter isEqualToString:@""]){
+        [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+            if (session) {
+//                BEBSettings *settings = [BEBDataManager sharedManager].settings;
+                settings.usernameTwitter = [session userName];
+                [self.tableView reloadData];
+                //            NSLog(@"signed in as %@", [session userName]);
+            } else {
+                //            NSLog(@"error: %@", [error localizedDescription]);
+            }
+        }];
+
+    
     }
 }
 
@@ -273,17 +295,6 @@
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"id, name, email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             if(!error)
             {
-                
-                //
-                //                NSDictionary *userinfo = [result objectForKey:@"user"];
-                //                NSNumber *userid = [result objectForKey:@"id"];
-                //                NSString *username = [userinfo objectForKey:@"username"];
-                //                [Common saveValueKey:@"user_id" Value:username];
-                //                NSString *useremail = [userinfo objectForKey:@"email"];
-                //                [Common saveValueKey:@"user_email" Value:useremail];
-                //                [SVProgressHUD dismiss];
-                
-                
                 NSString *email = [result objectForKey:@"email"];
                 NSString *userId = [result objectForKey: @"id"];
                 if(email.length > 0){

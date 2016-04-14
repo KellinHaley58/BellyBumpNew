@@ -2941,6 +2941,7 @@
                                                     <segment title="3"/>
                                                     <segment title="loop"/>
                                                 </segments>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="changeLoop:" destination="PMt-uP-VYk" eventType="valueChanged" id="w54-kW-Bg4"/>
                                                 </connections>

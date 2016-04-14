@@ -2961,7 +2961,7 @@
                                                 </connections>
                                             </slider>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_loop" translatesAutoresizingMaskIntoConstraints="NO" id="U8A-JB-bLO">
-                                                <rect key="frame" x="50" y="73" width="32" height="15"/>
+                                                <rect key="frame" x="40" y="73" width="32" height="15"/>
                                                 <animations/>
                                             </imageView>
                                             <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-HY-0Ei">
@@ -2994,6 +2994,7 @@
                                                     <segment title="3"/>
                                                     <segment title="loop"/>
                                                 </segments>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="changeLoop:" destination="3Bc-uM-5dT" eventType="valueChanged" id="f6P-jw-aNL"/>
                                                 </connections>

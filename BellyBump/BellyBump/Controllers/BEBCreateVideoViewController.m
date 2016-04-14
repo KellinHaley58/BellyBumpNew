@@ -258,7 +258,9 @@ static NSString *const placeHolderText = @"Double tap to edit text";
     [self.sliderTrimmer setHidden:YES];
 }
 - (void)valueChanged:(WLRangeSlider *)slider{
-//    slide
+    //    slide
+    self.panningProgress = YES;
+    self.trackCurrentPlayback.text = [NSString stringFromTime:slider.leftValue*self.songMaxTime];
     float _left = slider.leftValue;
     float _right = slider.rightValue;
     int frames = self.story.photos.count;
@@ -280,6 +282,9 @@ static NSString *const placeHolderText = @"Double tap to edit text";
             self.rangeSlider.rightValue = frames / (self.songMaxTime * self.fpsValue);
         }
     }
+    
+    self.audioPlayer.currentTime = slider.leftValue*self.songMaxTime;//self.sliderTrimmer.value;
+    self.panningProgress = NO;
 }
 
 -(IBAction)changeLoop:(UISegmentedControl *)sender
