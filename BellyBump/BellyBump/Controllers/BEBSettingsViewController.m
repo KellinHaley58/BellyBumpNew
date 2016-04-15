@@ -41,8 +41,8 @@
     [super viewDidAppear:animated];
     
     BEBSettings *settings = [BEBDataManager sharedManager].settings;
-    [settings getSocialUsernameFacebook];
-    [settings getSocialUsernameTwitter];
+//    [settings getSocialUsernameFacebook];
+//    [settings getSocialUsernameTwitter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,13 +118,18 @@
         
         if (indexPath.row == 0) {
             [cell.facebookImageView setHidden:NO];
-            cell.socialUsername.text = settings.usernameFacebook;
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            NSString *name =[prefs stringForKey:@"facebookName"];
+            if(name == nil) name = @"";
+            cell.socialUsername.text = name;
             cell.containerView.backgroundColor = RGB(150, 185, 212, 1);
         }
         else {
             [cell.twitterImageView setHidden:NO];
-            if (![settings.usernameTwitter isEqualToString:@""]) {
-                cell.socialUsername.text = [NSString stringWithFormat:@"@%@", settings.usernameTwitter];
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            NSString *name =[prefs stringForKey:@"twitterName"];
+            if(name != nil){
+                cell.socialUsername.text = [NSString stringWithFormat:@"@%@", name];
             }
             else {
                 cell.socialUsername.text = @"";
@@ -233,7 +238,6 @@
     }else if(indexPath.section == 2){
         if(indexPath.row == 0){ // facebook
             [self FacebookLogin:nil];
-           
         }else{ // twitter
             [self TwitterLogin];
         }
@@ -248,7 +252,10 @@
         [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
             if (session) {
 //                BEBSettings *settings = [BEBDataManager sharedManager].settings;
-                settings.usernameTwitter = [session userName];
+                NSString *name = [session userName];
+//                settings.usernameTwitter = name;
+                NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+                [prefs setObject:name forKey:@"twitterName"];
                 [self.tableView reloadData];
                 //            NSLog(@"signed in as %@", [session userName]);
             } else {
@@ -299,7 +306,9 @@
                 NSString *userId = [result objectForKey: @"id"];
                 if(email.length > 0){
                     BEBSettings *settings = [BEBDataManager sharedManager].settings;
-                    settings.usernameFacebook = email;
+//                    settings.usernameFacebook = email;
+                    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+                    [prefs setObject:email forKey:@"facebookName"];
                     [self.tableView reloadData];
                 }else{
                     NSLog(@"Facebook email is not verified");
